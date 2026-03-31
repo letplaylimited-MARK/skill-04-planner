@@ -98,8 +98,36 @@ Skill 01（翻译官）  → 需求结构化
 Skill 03（侦察官）  → 技术选型
 Skill 02（SOP师）   → 工程SOP  ──→  Skill 04（规划官）→ 操作手册
                                                         │
-                                                        ▼
-                                              Skill 05（验收师）
+                                          ┌─────────────┘
+                                          ▼
+                              OpenCode / Cursor / Aider 等 Agent 执行层
+                              （将操作手册作为 Prompt 输入，自主完成代码任务）
+                                          │
+                                          ▼
+                                Skill 05（验收师）→ PASS / FAIL
+```
+
+---
+
+## 与 OpenCode 等 Agent 工具协同
+
+Skill 04 输出的操作手册（Markdown 格式）可直接作为 Prompt 输入到 OpenCode、Cursor、Aider 等编程 Agent，让 AI 自主完成代码层面的执行工作，形成完整的 **规划 → 执行 → 验收** 闭环。
+
+| 文档 | 内容 |
+|------|------|
+| [OPENCODE_INTEGRATION.md](./OPENCODE_INTEGRATION.md) | OpenCode + 多大模型集成总览（四种方案、架构说明、效益分析） |
+| [OPENCODE_QUICKSTART.md](./OPENCODE_QUICKSTART.md) | 30 分钟快速上手（Ollama / Gemini / Claude / Qwen-Agent 四套配置） |
+
+**典型工作流：**
+
+```
+Skill 04 输出操作手册
+    ↓
+复制 Markdown → opencode --model gemini/pro-2.0
+    ↓
+OpenCode Agent Loop 自主执行（5-10 轮）
+    ↓
+Skill 05 验收 → PASS / FAIL
 ```
 
 ---
